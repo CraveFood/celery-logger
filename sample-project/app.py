@@ -1,16 +1,15 @@
-import os
-
-from celery import Celery  # noqa
-from requests import get
 import random
 
-app = Celery(
-    "app", broker="redis://redis:6379/0"    
-)
+from celery import Celery
+from requests import get
+
+app = Celery("app", broker="redis://redis:6379/0")
+
 
 @app.task
 def add(x, y):
     return x + y
+
 
 @app.task
 def call_external_api():
@@ -26,7 +25,5 @@ def call_external_api():
 
     # Raises an exception if the response code is not successfull
     response.raise_for_status()
-    
+
     return "The status code was: " + str(response.status_code)
-
-
