@@ -12,8 +12,8 @@ with open(requirements_file) as rfh:
     requirements = contents.strip().split("\n")
 
 setuptools.setup(
-    author="CraveFood",
-    author_email="devops@cravehq.com",
+    author="Thiago Ferreira",
+    author_email="th.thiago96@gmail.com",
     license="BSD license",
     name="celery-logger",
     version="0.0.1",
@@ -33,7 +33,8 @@ setuptools.setup(
     install_requires=requirements,
     keywords="logging, celery",
     long_description=long_description,
-    packages=setuptools.find_packages(exclude=("tests", "tests.*")),
+    long_description_content_type="text/markdown",
+    packages=["celerylogger"],
     python_requires=">=3.7",
     url="https://github.com/CraveFood/celery-logger",
 )
