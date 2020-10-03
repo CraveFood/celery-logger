@@ -37,3 +37,9 @@ install-requirements: clean ## installs requirements locally
 	pip install -r requirements/dev.txt
 	pip install -r requirements/tests.txt
 	pip install -r requirements/base.txt
+
+build: clean-build ## Builds python package
+	python3 setup.py sdist bdist_wheel
+
+upload: ## Upload package to pypi
+	python -m twine upload dist/*  --repository pypi --verbose
