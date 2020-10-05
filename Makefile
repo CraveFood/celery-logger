@@ -43,3 +43,7 @@ build: clean-build ## Builds python package
 
 upload: ## Upload package to pypi
 	python -m twine upload dist/*  --repository pypi --verbose
+
+upload-docker-hub:
+	docker build . -t cravefood/celery-logger:latest
+	docker push  cravefood/celery-logger:latest

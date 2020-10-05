@@ -4,3 +4,4 @@ WORKDIR /code
 COPY ./requirements/base.txt /code/
 RUN pip install -r base.txt
 COPY celerylogger/celery_logger.py /code/
+CMD python celery_logger.py
