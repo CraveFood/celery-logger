@@ -17,14 +17,15 @@ services:
             - redis
         volumes:
             - .:/code
-  
+
     celery-logger:
         build:
-            dockerfile: celerylogger/Dockerfile
+            dockerfile: Dockerfile
             context: ../
-        command: python celery_logger.py --celery-broker=redis://redis:6379/0
+        environment:
+            - CELERY_LOGGER_BROKER=redis://redis:6379/0
         links:
             - redis
-            
+
 volumes:
     redis-data:
