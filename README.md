@@ -84,6 +84,9 @@ Use the package manager [pip](https://pypi.org/project/celery-logger/) to instal
 pip install celerylogger
 ```
 
+Or go with the docker way: https://hub.docker.com/r/cravefood/celery-logger
+
+
 ## Usage
 
 The executable will be available in the path as `celery-logger`:
