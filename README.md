@@ -8,6 +8,13 @@ celery-logger is a python library for logging [celery](https://docs.celeryprojec
 - Multiple deployment options (docker, virtual machines)
 - Integration possibilities: ELK stack and AWS cloudwatch for example
 
+## How does it work?
+
+Celery-logger connects with your message broker (such as redis, rabbitMQ or SQS) and logs the tasks on a file or stdout.
+
+This way you can easily have multiple celery workers and see your logs in a single place.
+
+![Celery Logger Diagram](https://user-images.githubusercontent.com/9268203/128907058-e4306c14-6014-49c6-b265-2a794d2a3ce0.png)
 ## Sample project
 
 We provided a sample project for playing around and seeing how it works. 
@@ -71,20 +78,19 @@ $   docker-compose logs celery-logger | grep 20925a8c-03f7-4bd7-b3dd-24e2bc9e26e
 
 ## Installation
 
-<!-- Use the package manager [pip](https://pip.pypa.io/en/stable/) to install celery-logger.
+Use the package manager [pip](https://pypi.org/project/celery-logger/) to install celery-logger.
 
 ```bash
 pip install celerylogger
-``` -->
+```
 
 ## Usage
 
-<!-- TODO -->
+The executable will be available in the path as `celery-logger`:
 
-## Contributing
-
-<!-- TODO -->
-
-## License
-
-<!-- TODO -->
+```bash
+# Display the help text
+$ celery-logger -h
+# Start logging from a redis broker
+$ celery-logger --celery-broker redis://redis:6379/0
+```
