@@ -16,7 +16,7 @@ setuptools.setup(
     author_email="th.thiago96@gmail.com",
     license="BSD license",
     name="celery-logger",
-    version="0.0.1",
+    version="0.0.3",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
