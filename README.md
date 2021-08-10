@@ -94,3 +94,12 @@ $ celery-logger -h
 # Start logging from a redis broker
 $ celery-logger --celery-broker redis://redis:6379/0
 ```
+
+
+## Authors
+
+
+-  **Sergio Oliveira** - *Initial work* - [Seocam](https://github.com/seocam)
+-  **Thiago Ferreira** - *Improvements, documentation and current maintainer* - [thiagoferreiraw](https://github.com/thiagoferreiraw)
+-  **André Girol** - *Packaging and distribution* - [Girol](https://github.com/girol)
+
