@@ -37,4 +37,9 @@ setuptools.setup(
     packages=["celerylogger"],
     python_requires=">=3.7",
     url="https://github.com/CraveFood/celery-logger",
+    entry_points={
+        "console_scripts": [
+            "celery-logger = celerylogger.celery_logger:main",
+        ]
+    },
 )
