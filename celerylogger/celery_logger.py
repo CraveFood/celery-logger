@@ -3,10 +3,16 @@
 import argparse
 import logging
 import os
+import signal
+import sys
 from functools import lru_cache
 
 from celery import Celery
 
+def setup_exit_signals():
+    exit_gracefully =lambda *args: sys.exit(0)
+    signal.signal(signal.SIGINT, exit_gracefully)
+    signal.signal(signal.SIGTERM, exit_gracefully)
 
 @lru_cache(maxsize=None)
 def get_logger(event_type):
@@ -80,6 +86,7 @@ def parse_args():
 
 
 def main():
+    setup_exit_signals()
     args = parse_args()
     if not args.celery_broker:
         raise ValueError("Argument --celery-broker is required")
