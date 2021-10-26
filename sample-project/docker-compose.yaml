@@ -29,6 +29,8 @@ services:
             - CELERY_LOGGER_BROKER=redis://redis:6379/0
         links:
             - redis
+        volumes:
+            - ..:/usr/src/app
 
 volumes:
     redis-data:
