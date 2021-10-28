@@ -10,23 +10,43 @@ from functools import lru_cache
 
 from celery import Celery
 
+
+class EventFilter(logging.Filter):
+    def filter(self, record):
+        celery_event = record.msg
+
+        record.type = celery_event["type"]
+        record.name = celery_event["name"]
+        record.uuid = celery_event["uuid"]
+        record.hostname = celery_event["hostname"]
+        record.timestamp = celery_event["timestamp"]
+        record.raw_event = f"* Raw event: {celery_event}"
+
+        return True
+
+
 LOGGING_CONFIG = {
     "version": 1,
     "disable_existing_loggers": True,
     "formatters": {
-        "basic": {"format": "%(asctime)s - %(message)s"},
+        "basic": {
+            "format": "%(asctime)s - %(type)s %(name)s %(uuid)s %(hostname)s %(timestamp)s %(raw_event)s"  # noqa E501
+        },
     },
+    "filters": {"event": {"()": EventFilter}},
     "handlers": {
         "stdout": {
             "level": "INFO",
             "class": "logging.StreamHandler",
             "formatter": "basic",
+            "filters": ["event"],
         },
         "file": {
             "level": "DEBUG",
             "class": "logging.handlers.WatchedFileHandler",
             "formatter": "basic",
-            "filename": "/tmp/logger.txt",
+            "filename": "/tmp/celery_logger.log",
+            "filters": ["event"],
         },
     },
     "loggers": {
@@ -53,13 +73,11 @@ def celery_task_logger(app):
     def log_event(event):
         state.event(event)
         task = state.tasks.get(event["uuid"])
+        event_type = event.get("type")
 
-        msg_args = event
-        msg_args.update({"name": task.name})
-        msg = "{type} {name} {uuid} {hostname} {timestamp}".format(**msg_args)
-        msg += f" * Raw event: {event}"
-        logger = get_logger(event.get("type"))
-        logger.info(msg)
+        event.update({"name": task.name})
+        logger = get_logger(event_type)
+        logger.info(event)
 
     with app.connection() as connection:
         recv = app.events.Receiver(
