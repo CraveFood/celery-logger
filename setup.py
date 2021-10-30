@@ -16,7 +16,7 @@ setuptools.setup(
     author_email="th.thiago96@gmail.com",
     license="BSD license",
     name="celery-logger",
-    version="0.0.3",
+    version="0.0.4",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
@@ -38,8 +38,6 @@ setuptools.setup(
     python_requires=">=3.7",
     url="https://github.com/CraveFood/celery-logger",
     entry_points={
-        "console_scripts": [
-            "celery-logger = celerylogger.celery_logger:main",
-        ]
+        "console_scripts": ["celery-logger = celerylogger.celery_logger:main"]
     },
 )
